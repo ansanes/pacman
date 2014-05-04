@@ -11,11 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * Esta clase crea un JPanel con la pagina principal, la pagina de gameover y la de fase superada.
- * Adem�s crea el boton de inicio del juego.
- * 
- * @author: Francisco Javier Chisber Vila
- * @version: 16/04/2014
+ * Initial Screen Panel
  */
 
 public class InitialScreenPanel extends JPanel {
@@ -26,25 +22,25 @@ public class InitialScreenPanel extends JPanel {
 	private static final ImageIcon GAME_OVER_IMAGE = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pacman-game-over.gif"));
 	private static final ImageIcon WIN_IMAGEN = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pacman-victoria.gif"));
 	private static final ImageIcon BUTTON_IMAGE = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/boton_inicio.gif"));
-	// Background image
+	
 	private Image background;
-	// image height
-	private Integer altoImagen;
-	// imagen width.
-	private Integer anchoImagen;	
-	private GameScreenFrame juegoFrame;
+	
+	private Integer height;
+	
+	private Integer width;	
+	private GameScreenFrame gameScreenFrame;
 	
 	
 
 
 	public InitialScreenPanel(GameScreenFrame gameScreenFrame) {
-		this.juegoFrame=gameScreenFrame;
+		this.gameScreenFrame=gameScreenFrame;
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setDoubleBuffered(true);
 		background = BACKGROUND_IMAGE.getImage();
-		altoImagen = BACKGROUND_IMAGE.getIconHeight();
-		anchoImagen = BACKGROUND_IMAGE.getIconWidth();
+		height = BACKGROUND_IMAGE.getIconHeight();
+		width = BACKGROUND_IMAGE.getIconWidth();
 		Integer altoboton = BUTTON_IMAGE.getIconHeight();
 		Integer anchoboton = BUTTON_IMAGE.getIconWidth();
 		accionButton = new JButton("iniciar juego");
@@ -54,7 +50,7 @@ public class InitialScreenPanel extends JPanel {
 		
 		accionButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent arg0) {
-				juegoFrame.inicioJuego();
+				InitialScreenPanel.this.gameScreenFrame.inicioJuego();
 				
 			}
 		});
@@ -82,11 +78,11 @@ public class InitialScreenPanel extends JPanel {
 	}
 	
 	public Integer getAltoImagen() {
-		return altoImagen;
+		return height;
 	}
 
 	public Integer getAnchoImagen() {
-		return anchoImagen;
+		return width;
 	}
 
 }

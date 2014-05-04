@@ -123,7 +123,7 @@ public class Labyrinth {
 
 	
 
-	public Integer geRow(Integer y) {
+	public Integer getRow(Integer y) {
 		Double fila = Math.floor(y / 16);
 		return fila.intValue();
 	}

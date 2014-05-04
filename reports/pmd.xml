@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.0.5" timestamp="2014-05-04T19:06:29.210">
+<file name="C:\Users\ACE\Documents\NetBeansProjects\Pacman\src\main\java\com\jamessoft\pacman\Blinky.java">
+<violation beginline="44" endline="44" begincolumn="22" endcolumn="47" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="Blinky" method="calculateDirection" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+<file name="C:\Users\ACE\Documents\NetBeansProjects\Pacman\src\main\java\com\jamessoft\pacman\Clyde.java">
+<violation beginline="45" endline="45" begincolumn="22" endcolumn="47" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="Clyde" method="calculateDirection" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+<file name="C:\Users\ACE\Documents\NetBeansProjects\Pacman\src\main\java\com\jamessoft\pacman\GameScreenFrame.java">
+<violation beginline="250" endline="250" begincolumn="22" endcolumn="58" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showClydeHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="251" endline="251" begincolumn="37" endcolumn="61" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showClydeHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="259" endline="259" begincolumn="22" endcolumn="57" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showClydeHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="260" endline="260" begincolumn="37" endcolumn="61" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showClydeHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="268" endline="268" begincolumn="22" endcolumn="58" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showClydeHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="269" endline="269" begincolumn="37" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showClydeHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="285" endline="285" begincolumn="22" endcolumn="59" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showBlinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="286" endline="286" begincolumn="37" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showBlinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="294" endline="294" begincolumn="22" endcolumn="58" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showBlinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="295" endline="295" begincolumn="37" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showBlinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="303" endline="303" begincolumn="22" endcolumn="59" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showBlinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="304" endline="304" begincolumn="37" endcolumn="63" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showBlinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="322" endline="322" begincolumn="37" endcolumn="61" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showPinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="330" endline="330" begincolumn="22" endcolumn="57" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showPinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="331" endline="331" begincolumn="37" endcolumn="61" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showPinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="339" endline="339" begincolumn="22" endcolumn="58" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showPinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="340" endline="340" begincolumn="37" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="GameScreenFrame" method="showPinkyHome" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+<file name="C:\Users\ACE\Documents\NetBeansProjects\Pacman\src\main\java\com\jamessoft\pacman\Pacman.java">
+<violation beginline="64" endline="69" begincolumn="25" endcolumn="25" rule="CollapsibleIfStatements" ruleset="Basic" package="com.jamessoft.pacman" class="Pacman" method="movement" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="224" endline="226" begincolumn="33" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.jamessoft.pacman" class="Pacman" method="keyPressed" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="234" endline="236" begincolumn="33" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.jamessoft.pacman" class="Pacman" method="keyPressed" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="244" endline="246" begincolumn="33" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.jamessoft.pacman" class="Pacman" method="keyPressed" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="255" endline="257" begincolumn="33" endcolumn="33" rule="CollapsibleIfStatements" ruleset="Basic" package="com.jamessoft.pacman" class="Pacman" method="keyPressed" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+<file name="C:\Users\ACE\Documents\NetBeansProjects\Pacman\src\main\java\com\jamessoft\pacman\Pinky.java">
+<violation beginline="44" endline="44" begincolumn="22" endcolumn="47" rule="UselessParentheses" ruleset="Unnecessary" package="com.jamessoft.pacman" class="Pinky" method="calculateDirection" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.0.5/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+</pmd>

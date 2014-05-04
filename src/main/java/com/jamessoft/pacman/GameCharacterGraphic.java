@@ -5,51 +5,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * De esta clase abstracta heredan todos los personajes del juego.
- * 
- * @author:Francisco Javier Chisber Vila
- * @version:16/04/2014
+ * All game characters inherit form this class
+ *
  */
-
 public abstract class GameCharacterGraphic {
-	// Directions que pueden tomar los personajes.
+	//available directions
 	protected static final int NORTH = 0;
 	protected static final int SOUTH = 1;
 	protected static final int EAST = 2;
 	protected static final int WEST = 3;
-	// Celda o cell donde se encuentra nuestro personaje (Columna y fila).
-	protected Integer planoX;
-	protected Integer planoY;
-	// posicion coordenada x y coordenada y.
+	// character logical cells;
+	protected Integer planeX;
+	protected Integer planeY;
+	// x and y coordinates
 	protected int x;
 	protected int y;
-	// Ancho y Alto de cada celda (JLABEL)
+	// width and height of character jlabels
 	protected static final int ancho = 16;
 	protected static final int alto = 16;
-	// Direction que puede tomar el personaje.
+	// character direction
 	protected Integer direction;
-	//Instancia de labyrinth para poder realizar llamadas de consultas.
+	//Labyrinth reference
 	protected Labyrinth labyrinth = PacmanGame.getInstace().getLaberinto();
 
 	/**
-	 * M�todo abstracto del movimiento de los personajes.
+	 * method that moves character
 	 * 
 	 */
-	
 	protected abstract boolean movement();
 	
 	/**
-	 * M�todo que devuelve la posici�n x de nuestro personaje.
+	 * x getter
 	 * 
-	 * @return Devuelve posici�n x.
+	 * @return  x.
 	 */
-	
 	public int getX() {
 		return x;
 	}// Cierre del m�todo
 
 	/**
-	 * M�todo que devuelve la posici�n y de nuestro personaje.
+	 * y getter
 	 * 
 	 * @return Devuelve posici�n y.
 	 */
@@ -76,7 +71,7 @@ public abstract class GameCharacterGraphic {
 	 *         labyrinth.
 	 */
 	public Integer getPlanoX() {
-		return planoX;
+		return planeX;
 	}
 	
 	/**
@@ -87,7 +82,7 @@ public abstract class GameCharacterGraphic {
 	 */
 
 	public void setPlanoX(Integer planoX) {	
-		this.planoX = planoX;
+		this.planeX = planoX;
 		this.x=planoX*16;
 	}
 
@@ -99,7 +94,7 @@ public abstract class GameCharacterGraphic {
 	 *         labyrinth.
 	 */
 	public Integer getPlanoY() {
-		return planoY;
+		return planeY;
 	}
 	
 	/**
@@ -110,7 +105,7 @@ public abstract class GameCharacterGraphic {
 	 */
 
 	public void setPlanoY(Integer planoY) {
-		this.planoY = planoY;
+		this.planeY = planoY;
 		this.y=planoY*16;
 	}
 
@@ -125,7 +120,7 @@ public abstract class GameCharacterGraphic {
 	protected boolean intersection() {
 	
 		Integer planox = labyrinth.getColumn(x);
-		Integer planoy = labyrinth.geRow(y);
+		Integer planoy = labyrinth.getRow(y);
 		//Esto evita desbordamiento cuando el ghost esta en los limites.
 		if (planox == 0 || planox == 27) {
 			return false;

@@ -4,10 +4,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 /**
- * Clase del ghost Blinky que hereda de Ghost.
+ * Blinky Ghost
  * 
- * @author:Francisco Javier Chisber Vila
- * @version:16/04/2014
  */
 
 public class Blinky extends Ghost {
@@ -39,7 +37,6 @@ public class Blinky extends Ghost {
 	/**
 	 * Calculate possible direcction for the ghost
 	 */
-
 	protected void calculateDirection() {
 
 		// Si la posicion no es modulo de 16 o no esta en una intersection no
@@ -49,7 +46,7 @@ public class Blinky extends Ghost {
 		}
 
 		// Nos traemos la lista con las posibles directions a tomar.
-		List<Integer> directions = getDirectionsIntersection(planoX, planoY,
+		List<Integer> directions = getDirectionsIntersection(planeX, planeY,
 				direction);
 		// Si el tama�o de la lista es uno, solo hay una posibilidad y la
 		// tomamos.
@@ -80,8 +77,7 @@ public class Blinky extends Ghost {
 			return;
 		}
 
-		// En caso de no existir la posibilidad cogemos aleatoriamente una de
-		// las directions.
+		// Random direction
 		direction = directions.get(rnd.nextInt(directions.size()));
 	}
 
@@ -89,7 +85,7 @@ public class Blinky extends Ghost {
 	 * shows ghost image based on game state
 	 */
 
-	public void muestraGrafico() {
+	public void showGraphic() {
 		if (PacmanGame.getInstace().estadoEspecial()) {
 			ghostLabel.setIcon(GHOST_RED_ESPECIAL_IMAGE);
 

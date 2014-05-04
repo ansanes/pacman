@@ -4,10 +4,11 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/*ScoreBoard of the game
+*/
 public class ScoreBoard extends JPanel {
-
-    // Creamos un arraylist donde coincide la posici�n con la imagen.
+    
+    
     private ImageIcon[] digitImages = {
         new ImageIcon(
         Ghost.class
@@ -40,22 +41,22 @@ public class ScoreBoard extends JPanel {
         Ghost.class
         .getResource("/com/jamessoft/pacman/resources/LaberintoGIF/9.gif")),};
 
-    // Creamos las 4 labels del marcador.
+
     private JLabel centenasLabel;
     private JLabel decenasLabel;
     private JLabel unidadesLabel;
     private JLabel unidadmillarLabel;
 
-    // Contador de puntos.
-    private int puntos;
+
+    private int points;
 
     /**
-     * Constructor que crea un panel con 4 labels para hacer el marcador.
+     * Inits the score board with the appropiate points
      *
      * @param int con la puntuacion.
      */
-    public ScoreBoard(int puntuacion) {
-        puntos = puntuacion;
+    public ScoreBoard(int points) {
+        points = points;
         setLayout(null);
         centenasLabel = new JLabel();
         decenasLabel = new JLabel();
@@ -76,13 +77,9 @@ public class ScoreBoard extends JPanel {
 
     }
 
-    /**
-     * M�todo para dividir la puntuaci�n en unidades, decenas, centenas y unidad
-     * de millar. Posteriormente a�ade la imagen correspondiente a cada
-     * marcador.
-     */
+   
     private void cambiaMarcador() {
-        String puntosAmostrar = "" + (puntos + 10000);
+        String puntosAmostrar = "" + (points + 10000);
         int unidades = Integer.parseInt(puntosAmostrar.substring(
                 puntosAmostrar.length() - 1, puntosAmostrar.length()));
         int decenas = Integer.parseInt(puntosAmostrar.substring(
@@ -99,13 +96,11 @@ public class ScoreBoard extends JPanel {
     }
 
     /**
-     * M�todo para incrementar los puntos y repintar el marcador, cuando comemos
-     * un punto o un ghost.
-     *
-     * @param int como parametro la puntos incrementados.
+     * Updates scoreboard with the given points
+     * @param int number of points
      */
-    public void actualizarMarcador(int puntos) {
-        this.puntos += puntos;
+    public void updateScoreBoard(int points) {
+        this.points += points;
         cambiaMarcador();
         repaint();
 

@@ -3,12 +3,10 @@ package com.jamessoft.pacman;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-
+//dd
 /**
- * Clase del ghost Clyde que hereda de Ghost.
+ * Clyde Ghost
  * 
- * @author:Francisco Javier Chisber Vila
- * @version:16/04/2014
  */
 
 public class Clyde extends Ghost {
@@ -38,9 +36,8 @@ public class Clyde extends Ghost {
 	}
 
 	/**
-	 * M�todo que nos permite averiguar las posibles directions que puede tomar
-	 * el ghost en su celda actual.
-	 */
+         *  Calculate possible direcction for the ghost
+        */
 
 	protected void calculateDirection() {
 		// Si la posicion no es modulo de 16 o no esta en una intersection no
@@ -49,7 +46,7 @@ public class Clyde extends Ghost {
 			return;
 		}
 		// Nos traemos la lista con las posibles directions a tomar.
-		List<Integer> directions = getDirectionsIntersection(planoX, planoY,
+		List<Integer> directions = getDirectionsIntersection(planeX, planeY,
 				direction);
 		// Cuando llega a la intersecci�n genera la direction aleatoriamente de
 		// las posibles a tomar del array.
@@ -57,11 +54,10 @@ public class Clyde extends Ghost {
 	}
 
 	/**
-	 * M�todo que nos permite cambiar la imagen del ghost en funci�n a su
-	 * direcci�n y su estado (asustado o normal).
+	 * shows ghost image based on game state
 	 */
 
-	public void muestraGrafico() {
+	public void showGraphic() {
 		if (PacmanGame.getInstace().estadoEspecial()) {
 			ghostLabel.setIcon(GHOST_ORANGE_ESPECIAL_IMAGE);
 		} else {

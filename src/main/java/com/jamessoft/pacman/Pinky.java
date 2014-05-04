@@ -5,12 +5,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
- * Clase del ghost Pinky que hereda de Ghost.
- * 
- * @author:Francisco Javier Chisber Vila
- * @version:16/04/2014
+ * Pinky  Ghost.
+ *
  */
-
 public class Pinky extends Ghost {
 
 	private static final Icon GHOST_PINK_UP_IMAGE = new ImageIcon(
@@ -39,8 +36,7 @@ public class Pinky extends Ghost {
 	}
 
 	/**
-	 * M�todo que nos permite averiguar las posibles directions que puede tomar
-	 * el ghost en su celda actual.
+	 * Calculate possible direcction for the ghost
 	 */
 	protected void calculateDirection() {
 		// Si la posicion no es modulo de 16 o no esta en una intersection no
@@ -49,7 +45,7 @@ public class Pinky extends Ghost {
 			return;
 		}
 		// Nos traemos la lista con las posibles directions a tomar.
-		List<Integer> directions = getDirectionsIntersection(planoX, planoY,
+		List<Integer> directions = getDirectionsIntersection(planeX, planeY,
 				direction);
 		// Si el tama�o de la lista es uno, solo hay una posibilidad y la
 		// tomamos.
@@ -85,10 +81,9 @@ public class Pinky extends Ghost {
 	}
 
 	/**
-	 * M�todo que nos permite cambiar la imagen del ghost en funci�n a su
-	 * direcci�n y su estado (asustado o normal).
+	 * shows ghost image based on game state
 	 */
-	public void muestraGrafico() {
+	public void showGraphic() {
 		if (PacmanGame.getInstace().estadoEspecial()) {
 			ghostLabel.setIcon(GHOST_PINK_ESPECIAL_IMAGE);
 		} else {

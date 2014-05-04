@@ -8,26 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Esta clase define el personaje de pacman que se compone de una JLabel con el
- * gr�fico del personaje y que ir� actualizando su posici�n en el JFrame. Esta
- * clase hereda de GameCharacterGraphic.
- * 
- * @author:Francisco Javier Chisber Vila
- * @version:16/04/2014
+ * Pacman Character
  */
 
 public class Pacman extends GameCharacterGraphic {
-	// Label del personaje
-	public JLabel personajePacman;
+	
+	public JLabel pacmanLabel;
 	private static final int SPEED = 2;
 	private int directionPrevista = GameCharacterGraphic.WEST;
 
 	/**
-	 * Constructor para inicializar objeto pacman. Las tareas que realiza son: -
-	 * Indicamos posiciones iniciales x e y. - Creamos una instalacia a
-	 * labyrinth. - Obtenemos la celda donde se ubica la label (columna y Fila).
-	 * - Creamos la Label y le asignamos una imagen y una posici�n. - Le
-	 * indicamos que empiece con la direcci�n WEST. - Lo validamos.
+	 * Init Pacaman character
 	 */
 
 	public Pacman() {
@@ -37,24 +28,23 @@ public class Pacman extends GameCharacterGraphic {
 		//Instancia a labyrinth.
 		labyrinth = PacmanGame.getInstace().getLaberinto();
 		//Celda original de inicio de juego pacman.
-		planoX = labyrinth.getColumn(x);
-		planoY = labyrinth.geRow(y);
+		planeX = labyrinth.getColumn(x);
+		planeY = labyrinth.getRow(y);
 		//Creamos la label que contendra la imagen.
-		personajePacman = new JLabel();
-		personajePacman.setIcon(new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_1.gif")));
-		personajePacman.setBounds(x, y, ancho, alto);
+		pacmanLabel = new JLabel();
+		pacmanLabel.setIcon(new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_1.gif")));
+		pacmanLabel.setBounds(x, y, ancho, alto);
 		//Inicializamos la direction hacia la left.
 		direction = GameCharacterGraphic.WEST;
-		personajePacman.validate();
+		pacmanLabel.validate();
 
 	}
 
 	/**
 	 * 
-	 * M�todo que devuelve si es posible mover personaje y adem�s la realiza si
-	 * es cierto actualizando coordenadas (x,y) y plano (columan,fila).
+	 * Movement method
 	 * 
-	 * @return Devuelve si hay cambio de cell
+	 * @return cell changed?
 	 */
 
 	public boolean movement() {
@@ -72,7 +62,7 @@ public class Pacman extends GameCharacterGraphic {
 		if ((x % 16) == 0 && (y % 16) == 0) {
 
 			if (intersection()
-					&& getDirectionsIntersection(planoX, planoY, direction)
+					&& getDirectionsIntersection(planeX, planeY, direction)
 							.contains(directionPrevista)) {
 				
 				direction = directionPrevista;
@@ -83,79 +73,79 @@ public class Pacman extends GameCharacterGraphic {
 		// funci�n de la direcci�n.
 		switch (direction) {
 		case GameCharacterGraphic.EAST:
-			if (planoX % 2 == 0) {
-				personajePacman
+			if (planeX % 2 == 0) {
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_right_1.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			} else {
-				personajePacman
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_right_2.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			}
 			newX = x + SPEED;
 			newY = y;
 			newPlanoX = labyrinth.getColumn(newX + 15);
-			newPlanoY = planoY;
+			newPlanoY = planeY;
 			break;
 		case GameCharacterGraphic.WEST:
-			if (planoX % 2 == 0) {
-				personajePacman
+			if (planeX % 2 == 0) {
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_1.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			} else {
-				personajePacman
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_2.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			}
 			newX = x - SPEED;
 			newY = y;
 			newPlanoX = labyrinth.getColumn(newX);
-			newPlanoY = planoY;
+			newPlanoY = planeY;
 			break;
 		case GameCharacterGraphic.NORTH:
-			if (planoY % 2 == 0) {
-				personajePacman
+			if (planeY % 2 == 0) {
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_up_1.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			} else {
-				personajePacman
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_up_2.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			}
 			newY = y - SPEED;
 			newX = x;
-			newPlanoX = planoX;
+			newPlanoX = planeX;
 			newPlanoY = labyrinth.getColumn(newY);
 			break;
 		case GameCharacterGraphic.SOUTH:
-			if (planoY % 2 == 0) {
-				personajePacman
+			if (planeY % 2 == 0) {
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_down_1.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			} else {
-				personajePacman
+				pacmanLabel
 						.setIcon(new ImageIcon(
 								Ghost.class
 										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_down_2.gif")));
-				personajePacman.validate();
+				pacmanLabel.validate();
 			}
 			newY = y + SPEED;
 			newX = x;
-			newPlanoX = planoX;
+			newPlanoX = planeX;
 			newPlanoY = labyrinth.getColumn(newY + 15);
 			break;
 		default:
@@ -165,9 +155,9 @@ public class Pacman extends GameCharacterGraphic {
 		// Si no hay cambio de plano indicado por el incremento de x e y,
 		// seguimos moviendo a pacman.
 
-		if (!(newPlanoX != planoX || newPlanoY != planoY)) {
-			planoX = newPlanoX;
-			planoY = newPlanoY;
+		if (!(newPlanoX != planeX || newPlanoY != planeY)) {
+			planeX = newPlanoX;
+			planeY = newPlanoY;
 			x = newX;
 			y = newY;
 			return true;
@@ -181,8 +171,8 @@ public class Pacman extends GameCharacterGraphic {
 			if (contenidoCell == -1) {
 				return false;
 			} else {
-				planoX = newPlanoX;
-				planoY = newPlanoY;
+				planeX = newPlanoX;
+				planeY = newPlanoY;
 				x = newX;
 				y = newY;
 				return true;
@@ -192,8 +182,8 @@ public class Pacman extends GameCharacterGraphic {
 	}
 
 	/**
-	 * M�todo para ejecutar movimiento y adem�s realiza el cambio de coordenadas
-	 * del tunel izquierdo y derecho de la pantalla.
+	 *
+         *  Moves pacman
 	 * 
 	 */
 	public void move() {
@@ -210,9 +200,7 @@ public class Pacman extends GameCharacterGraphic {
 	}
 
 	/**
-	 * M�todo implementado por el keyListener que nos actualiza la direction de
-	 * pacman seg�n direcci�n que pulsemos con el teclado.
-	 * 
+	 * Check key pressed and determine direction
 	 * @param KeyEvent la tecla capturada al pulsar en el teclado.
 	 */
 
@@ -272,17 +260,17 @@ public class Pacman extends GameCharacterGraphic {
 
 		// Si la direction elegida por el jugardor no est� dentro de la
 		// directions posibles, reestablecemos la direction previa
-		if (!getDirectionsPosibles(planoX, planoY).contains(direction)) {
+		if (!getDirectionsPosibles(planeX, planeY).contains(direction)) {
 			direction = directionActual;
 		}
 	}
 
 	
-	/**
-	 * M�todo calcula las directions posibles a partir de una coordenada del tablero.
+	/**	 
 	 * 
-	 * @param Integer para el plano x (columna) y Integer para el plano y (fila).
-	 * @return Lista con las posible directions que se puede tomar en las celdas contiguas.
+         * Possible pacman directions
+	 * @param pacman current position
+	 * @return possible directions list
 	 */
 	
 	// 
@@ -308,9 +296,10 @@ public class Pacman extends GameCharacterGraphic {
 	}
 
 	/**
-	 * M�todo para actualizar direcci�n de pacman.
 	 * 
-	 * @param int que indica la direcci�n nueva a actualizar.
+         * Set pacman direction
+	 * 
+	 * @param int pacman direction
 	 */
 
 	public void setDirection(int direction) {
@@ -318,4 +307,4 @@ public class Pacman extends GameCharacterGraphic {
 
 	}
 
-}// Cierre de la clase.
+}
