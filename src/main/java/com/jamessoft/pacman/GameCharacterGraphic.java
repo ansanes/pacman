@@ -12,12 +12,12 @@ import java.util.List;
  */
 
 public abstract class GameCharacterGraphic {
-	// Direcciones que pueden tomar los personajes.
-	protected static final int NORTE = 0;
-	protected static final int SUR = 1;
-	protected static final int ESTE = 2;
-	protected static final int OESTE = 3;
-	// Celda o casilla donde se encuentra nuestro personaje (Columna y fila).
+	// Directions que pueden tomar los personajes.
+	protected static final int NORTH = 0;
+	protected static final int SOUTH = 1;
+	protected static final int EAST = 2;
+	protected static final int WEST = 3;
+	// Celda o cell donde se encuentra nuestro personaje (Columna y fila).
 	protected Integer planoX;
 	protected Integer planoY;
 	// posicion coordenada x y coordenada y.
@@ -26,8 +26,8 @@ public abstract class GameCharacterGraphic {
 	// Ancho y Alto de cada celda (JLABEL)
 	protected static final int ancho = 16;
 	protected static final int alto = 16;
-	// Direccion que puede tomar el personaje.
-	protected Integer direccion;
+	// Direction que puede tomar el personaje.
+	protected Integer direction;
 	//Instancia de labyrinth para poder realizar llamadas de consultas.
 	protected Labyrinth labyrinth = PacmanGame.getInstace().getLaberinto();
 
@@ -36,7 +36,7 @@ public abstract class GameCharacterGraphic {
 	 * 
 	 */
 	
-	protected abstract boolean movimiento();
+	protected abstract boolean movement();
 	
 	/**
 	 * M�todo que devuelve la posici�n x de nuestro personaje.
@@ -62,7 +62,7 @@ public abstract class GameCharacterGraphic {
 	 * idea de posteriormente detectar colisiones entre personajes.
 	 * 
 	 * @return Devuelve un Rectangulo que envuelve a nuestro personaje (pacaman
-	 *         o fantasmas).
+	 *         o ghosts).
 	 */
 	public Rectangle ObtenerLimites() {
 		return new Rectangle(x, y, ancho, alto);
@@ -116,36 +116,36 @@ public abstract class GameCharacterGraphic {
 
 	/**
 	 * 
-	 * M�todo que devuelve CIERTO si el personaje se encuentra en una casilla de
+	 * M�todo que devuelve CIERTO si el personaje se encuentra en una cell de
 	 * instersecci�n.
 	 * 
 	 * @return Devuelve CIERTO si el personaje esta en una intersecci�n con 2 o
-	 *         mas direcciones posibles.
+	 *         mas directions posibles.
 	 */
-	protected boolean interseccion() {
+	protected boolean intersection() {
 	
-		Integer planox = labyrinth.getColumna(x);
-		Integer planoy = labyrinth.getFila(y);
-		//Esto evita desbordamiento cuando el fantasma esta en los limites.
+		Integer planox = labyrinth.getColumn(x);
+		Integer planoy = labyrinth.geRow(y);
+		//Esto evita desbordamiento cuando el ghost esta en los limites.
 		if (planox == 0 || planox == 27) {
 			return false;
 		}
-		//Obtenemos los valores de las casillas contiguas para saber si son pisables.
-		Integer casilladerecha = labyrinth.getValueAt(planox + 1, planoy);
-		Integer casillaizquierda = labyrinth.getValueAt(planox - 1, planoy);
-		Integer casillaarriba = labyrinth.getValueAt(planox, planoy - 1);
-		Integer casillaabajo = labyrinth.getValueAt(planox, planoy + 1);
-		//Detectamos las intersecciones.
-		if (casilladerecha != -1 && casillaabajo != -1) {
+		//Obtenemos los valores de las cells contiguas para saber si son pisables.
+		Integer cellright = labyrinth.getValueAt(planox + 1, planoy);
+		Integer cellleft = labyrinth.getValueAt(planox - 1, planoy);
+		Integer cellup = labyrinth.getValueAt(planox, planoy - 1);
+		Integer celldown = labyrinth.getValueAt(planox, planoy + 1);
+		//Detectamos las intersectiones.
+		if (cellright != -1 && celldown != -1) {
 			return true;
 		}
-		if (casillaizquierda != -1 && casillaabajo != -1) {
+		if (cellleft != -1 && celldown != -1) {
 			return true;
 		}
-		if (casillaizquierda != -1 && casillaarriba != -1) {
+		if (cellleft != -1 && cellup != -1) {
 			return true;
 		}
-		if (casilladerecha != -1 && casillaarriba != -1) {
+		if (cellright != -1 && cellup != -1) {
 			return true;
 		}
 		return false;
@@ -153,33 +153,33 @@ public abstract class GameCharacterGraphic {
 
 	/**
 	 * 
-	 * M�todo que nos permite averiguar las posibles direcciones que puede tomar
+	 * M�todo que nos permite averiguar las posibles directions que puede tomar
 	 * un personaje en su celda.
 	 * 
 	 * @param x
-	 *            (COLUMNA), y (FILA) y direccionActual(NORTE,SUR,ESTE,OESTE).
-	 * @return Devuelve una LISTA con las posibles direcciones que puede tomar
-	 *         el personaje desde su casilla en el pr�ximo movimiento.
+	 *            (COLUMNA), y (FILA) y directionActual(NORTH,SOUTH,EAST,WEST).
+	 * @return Devuelve una LISTA con las posibles directions que puede tomar
+	 *         el personaje desde su cell en el pr�ximo movimiento.
 	 */
-	protected List<Integer> getDireccionesInterseccion(Integer x, Integer y,
-			Integer direccionActual) {
-				List<Integer> direcciones = new ArrayList<Integer>();
-				Integer casillaDerecha = labyrinth.getValueAt(x + 1, y);
-				Integer casillaIzquierda = labyrinth.getValueAt(x - 1, y);
-				Integer casillaArriba = labyrinth.getValueAt(x, y - 1);
-				Integer casillaAbajo = labyrinth.getValueAt(x, y + 1);
-				if (casillaArriba != -1 && direccionActual != GameCharacterGraphic.SUR) {
-					direcciones.add(GameCharacterGraphic.NORTE);
+	protected List<Integer> getDirectionsIntersection(Integer x, Integer y,
+			Integer directionActual) {
+				List<Integer> directions = new ArrayList<Integer>();
+				Integer cellRight = labyrinth.getValueAt(x + 1, y);
+				Integer cellLeft = labyrinth.getValueAt(x - 1, y);
+				Integer cellUp = labyrinth.getValueAt(x, y - 1);
+				Integer cellDown = labyrinth.getValueAt(x, y + 1);
+				if (cellUp != -1 && directionActual != GameCharacterGraphic.SOUTH) {
+					directions.add(GameCharacterGraphic.NORTH);
 				}
-				if (casillaAbajo != -1 && direccionActual != GameCharacterGraphic.NORTE) {
-					direcciones.add(GameCharacterGraphic.SUR);
+				if (cellDown != -1 && directionActual != GameCharacterGraphic.NORTH) {
+					directions.add(GameCharacterGraphic.SOUTH);
 				}
-				if (casillaDerecha != -1 && direccionActual != GameCharacterGraphic.OESTE) {
-					direcciones.add(GameCharacterGraphic.ESTE);
+				if (cellRight != -1 && directionActual != GameCharacterGraphic.WEST) {
+					directions.add(GameCharacterGraphic.EAST);
 				}
-				if (casillaIzquierda != -1 && direccionActual != GameCharacterGraphic.ESTE) {
-					direcciones.add(GameCharacterGraphic.OESTE);
+				if (cellLeft != -1 && directionActual != GameCharacterGraphic.EAST) {
+					directions.add(GameCharacterGraphic.WEST);
 				}
-				return direcciones;
+				return directions;
 			}
 }

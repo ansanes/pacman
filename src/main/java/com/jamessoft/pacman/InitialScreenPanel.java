@@ -19,29 +19,22 @@ import javax.swing.JPanel;
  */
 
 public class InitialScreenPanel extends JPanel {
-	//Boton para iniciar juego.
+	
 	private JButton accionButton;
-	//Imagen que contendra el panel dependiendo del estado del juego.
-	private static final ImageIcon IMAGEN_FONDO = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pantallainicio.gif"));
-	private static final ImageIcon IMAGEN_GAME_OVER = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pacman-game-over.gif"));
-	private static final ImageIcon IMAGEN_FASE_SUPERADA = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pacman-victoria.gif"));
-	private static final ImageIcon IMAGEN_BOTON = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/boton_inicio.gif"));
-	//Imagen del fondo del JPanel.
+
+	private static final ImageIcon BACKGROUND_IMAGE = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pantallainicio.gif"));
+	private static final ImageIcon GAME_OVER_IMAGE = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pacman-game-over.gif"));
+	private static final ImageIcon WIN_IMAGEN = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/pacman-victoria.gif"));
+	private static final ImageIcon BUTTON_IMAGE = new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/InicioyFin/boton_inicio.gif"));
+	// Background image
 	private Image background;
-	//Alto de la imagen.
+	// image height
 	private Integer altoImagen;
-	//Ancho de la imagen.
-	private Integer anchoImagen;
-	//Instancia a GameScreenFrame.
+	// imagen width.
+	private Integer anchoImagen;	
 	private GameScreenFrame juegoFrame;
 	
-	/**
-	 * 
-	 * M�todo que se encarga de generar el JPanel y el boton de inicio.
-	 * 
-	 * @param GameScreenFrame del juego.
-	 *           
-	 */
+	
 
 
 	public InitialScreenPanel(GameScreenFrame gameScreenFrame) {
@@ -49,15 +42,15 @@ public class InitialScreenPanel extends JPanel {
 		setLayout(null);
 		setBackground(Color.BLACK);
 		setDoubleBuffered(true);
-		background = IMAGEN_FONDO.getImage();
-		altoImagen = IMAGEN_FONDO.getIconHeight();
-		anchoImagen = IMAGEN_FONDO.getIconWidth();
-		Integer altoboton = IMAGEN_BOTON.getIconHeight();
-		Integer anchoboton = IMAGEN_BOTON.getIconWidth();
+		background = BACKGROUND_IMAGE.getImage();
+		altoImagen = BACKGROUND_IMAGE.getIconHeight();
+		anchoImagen = BACKGROUND_IMAGE.getIconWidth();
+		Integer altoboton = BUTTON_IMAGE.getIconHeight();
+		Integer anchoboton = BUTTON_IMAGE.getIconWidth();
 		accionButton = new JButton("iniciar juego");
 		accionButton.setBackground(Color.BLACK);
 		accionButton.setBounds(150, 380, anchoboton, altoboton);
-		accionButton.setIcon(IMAGEN_BOTON);
+		accionButton.setIcon(BUTTON_IMAGE);
 		
 		accionButton.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent arg0) {
@@ -70,13 +63,7 @@ public class InitialScreenPanel extends JPanel {
 
 	}
 	
-	/**
-	 * 
-	 * M�todo que se encarga de pintar el panel.
-	 * 
-	 * @param Graphics
-	 *           
-	 */
+	
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -84,42 +71,20 @@ public class InitialScreenPanel extends JPanel {
 		g2.drawImage(background, 0, 0, null);
 	}
 
-	/**
-	 * 
-	 * M�todo que se encarga de actualizar la imagen de GAME OVER.
-	 *           
-	 */
-	
 	public void setGameOver(){
-		background=IMAGEN_GAME_OVER.getImage();			
+		background=GAME_OVER_IMAGE.getImage();			
 	}
 	
-	/**
-	 * 
-	 * M�todo que se encarga de actualizar la imagen de FASE SUPERADA.
-	 *           
-	 */
 	
 	public void setVictoria() {
-		background=IMAGEN_FASE_SUPERADA.getImage();
+		background=WIN_IMAGEN.getImage();
 		
 	}
-	
-	/**
-	 * 
-	 * M�todo que devuelve el alto de la imagen del JPanel.
-	 *           
-	 */
 	
 	public Integer getAltoImagen() {
 		return altoImagen;
 	}
 
-	/**
-	 * 
-	 * M�todo que devuelve el ancho de la imagen del JPanel.
-	 *           
-	 */	
 	public Integer getAnchoImagen() {
 		return anchoImagen;
 	}

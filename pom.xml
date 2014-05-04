@@ -56,8 +56,8 @@
                         </goals>
                         <configuration>
                             <headerType>gui</headerType>
-                            <jar>${project.build.directory}/${artifactId}-${version}.jar</jar>
-                            <outfile>${project.build.directory}/howtodoinjava.exe</outfile>
+                            <jar>${project.build.directory}/${project.artifactId}-${project.version}.jar</jar>
+                            <outfile>${project.build.directory}/pacman.exe</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
                                 <mainClass>com.jamessoft.pacman.PacmanGame</mainClass>
@@ -72,13 +72,13 @@
                                 <fileVersion>1.0.0.0</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
-                                <copyright>2012 jamessoft</copyright>
+                                <copyright>2014 jamessoft</copyright>
                                 <productVersion>1.0.0.0</productVersion>
                                 <txtProductVersion>1.0.0.0</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <companyName>jamessofft</companyName>
                                 <internalName>Pacman</internalName>
-                                <originalFilename>Pacman</originalFilename>
+                                <originalFilename>pacman.exe</originalFilename>
                             </versionInfo>
                         </configuration>
                     </execution>

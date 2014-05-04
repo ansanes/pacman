@@ -31,11 +31,11 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 	private Timer timer;
 	// Personaje Pacman.
 	private Pacman pacman;
-	// Fantasma Rojo
+	// Ghost Red
 	private Ghost blinky;
-	// Fantasma Rosa.
+	// Ghost Pink.
 	private Pinky pinky;
-	// Fantasma Naranja.
+	// Ghost Orange.
 	private Ghost clyde;
 	// Panel de capas.
 	private JLayeredPane juegoPane;
@@ -139,9 +139,9 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 	 */
 
 	private void GenerarLaberintoGrafico() {
-		int a = laberintoVirtual.DevolverCantidadFilasLaberinto();
+		int a = laberintoVirtual.getRowNumber();
 		for (int i = 0; i < a; i++) {
-			int k = laberintoVirtual.DevolverCantidadColumnasLaberinto();
+			int k = laberintoVirtual.getColumnNumber();
 
 			for (int j = 0; j < k; j++) {
 				laberintoGrafico[i][j] = new JLabel();
@@ -149,13 +149,13 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 						.setIcon(new ImageIcon(
 								Ghost.class.getResource("/com/jamessoft/pacman/resources/LaberintoGIF/"
 										+ laberintoVirtual
-												.DevolverCodigoImagenMatriz(i,
+												.getImageACell(i,
 														j) + ".gif")));
 				laberintoGrafico[i][j].setBounds(
-						i * laberintoVirtual.DevolverLargoImagenes(), j
-								* laberintoVirtual.DevolverAlturaImagenes(),
-						laberintoVirtual.DevolverLargoImagenes(),
-						laberintoVirtual.DevolverAlturaImagenes());
+						i * laberintoVirtual.getImageWidth(), j
+								* laberintoVirtual.getImageHeight(),
+						laberintoVirtual.getImageWidth(),
+						laberintoVirtual.getImageHeight());
 				laberintoGrafico[i][j].validate();
 
 				juegoPane.add(laberintoGrafico[i][j], 3, 2);
@@ -175,8 +175,8 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 	 * contador bolas. 2- Pacman con bola grande: La pone invisible, ejecuta
 	 * modo especial, no suma puntos y resta contador bolas. 3- Si contador
 	 * bolas es igual a 0 ejecuta pantalla de fase superada. 4- Pacman con
-	 * fantasma en modo especial: Lo pone invisible, lo envia a casa un tiempo y
-	 * suma 100 puntos. 5- Pacman con fantasma en modo normal: Resta una vida y
+	 * ghost en modo especial: Lo pone invisible, lo envia a casa un tiempo y
+	 * suma 100 puntos. 5- Pacman con ghost en modo normal: Resta una vida y
 	 * si son 0 fin de juego.
 	 */
 	private void procesarColisiones() {
@@ -201,7 +201,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			initialScreenPanel.setVictoria();
 			cardLayout.show(getContentPane(), "iniciopane");
 		}
-		Ghost ghost = getFantasmaEnCoordenadas(pacman.getX(), pacman.getY());
+		Ghost ghost = getGhostEnCoordenadas(pacman.getX(), pacman.getY());
 		if (ghost != null) {
 			// En modo especial.
 			if (PacmanGame.getInstace().estadoEspecial()) {
@@ -212,7 +212,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 				// Lo metemos dentro de la casa
 				ghost.setPlanoX(15);
 				ghost.setPlanoY(17);
-				// Ejecutamos metodos para ver o esconder la imagen del fantasma
+				// Ejecutamos metodos para ver o esconder la imagen del ghost
 				// en casa.
 				visualizarPinkyenCasa();
 				visualizarBlinkyenCasa();
@@ -225,7 +225,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 					vidas--;
 					pacman.setPlanoX(13);
 					pacman.setPlanoY(20);
-					pacman.setDireccion(GameCharacterGraphic.OESTE);
+					pacman.setDirection(GameCharacterGraphic.WEST);
 					// Ponemos label de la vida en invisible.
 					laberintoGrafico[2][34].setVisible(false);
 					laberintoGrafico[2][35].setVisible(false);
@@ -241,24 +241,24 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			}
 
 		}
-		// Si chocan los fantasmas cambian de direcci�n.
+		// Si chocan los ghosts cambian de direcci�n.
 		if (blinky.getPlanoX() == clyde.getPlanoX()
 				&& blinky.getPlanoY() == clyde.getPlanoY()
-				&& blinky.direccion != clyde.direccion) {
-			blinky.cambiaADireccionContraria();
-			clyde.cambiaADireccionContraria();
+				&& blinky.direction != clyde.direction) {
+			blinky.cambiaADirectionContraria();
+			clyde.cambiaADirectionContraria();
 		}
 		if (blinky.getPlanoX() == pinky.getPlanoX()
 				&& blinky.getPlanoY() == pinky.getPlanoY()
-				&& blinky.direccion != pinky.direccion) {
-			blinky.cambiaADireccionContraria();
-			pinky.cambiaADireccionContraria();
+				&& blinky.direction != pinky.direction) {
+			blinky.cambiaADirectionContraria();
+			pinky.cambiaADirectionContraria();
 		}
 		if (pinky.getPlanoX() == clyde.getPlanoX()
 				&& pinky.getPlanoY() == clyde.getPlanoY()
-				&& pinky.direccion != clyde.direccion) {
-			pinky.cambiaADireccionContraria();
-			clyde.cambiaADireccionContraria();
+				&& pinky.direction != clyde.direction) {
+			pinky.cambiaADirectionContraria();
+			clyde.cambiaADirectionContraria();
 		}
 	}
 
@@ -269,7 +269,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 
 	private void visualizarClydeenCasa() {
 		if ((clyde.ghostLabel.isVisible() == false)
-				&& (clyde.isEnTablero() == true)) {
+				&& (clyde.isOnBoard() == true)) {
 			laberintoGrafico[15][16].setVisible(true);
 			laberintoGrafico[16][16].setVisible(true);
 			laberintoGrafico[15][17].setVisible(true);
@@ -278,7 +278,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			laberintoGrafico[16][18].setVisible(true);
 		}
 		if ((clyde.ghostLabel.isVisible() == true)
-				&& (clyde.isEnTablero() == true)) {
+				&& (clyde.isOnBoard() == true)) {
 			laberintoGrafico[15][16].setVisible(false);
 			laberintoGrafico[16][16].setVisible(false);
 			laberintoGrafico[15][17].setVisible(false);
@@ -287,7 +287,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			laberintoGrafico[16][18].setVisible(false);
 		}
 		if ((clyde.ghostLabel.isVisible() == false)
-				&& (clyde.isEnTablero() == false)) {
+				&& (clyde.isOnBoard() == false)) {
 			laberintoGrafico[15][16].setVisible(true);
 			laberintoGrafico[16][16].setVisible(true);
 			laberintoGrafico[15][17].setVisible(true);
@@ -304,7 +304,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 	 */
 	private void visualizarBlinkyenCasa() {
 		if ((blinky.ghostLabel.isVisible() == false)
-				&& (blinky.isEnTablero() == true)) {
+				&& (blinky.isOnBoard() == true)) {
 			laberintoGrafico[11][16].setVisible(true);
 			laberintoGrafico[12][16].setVisible(true);
 			laberintoGrafico[11][17].setVisible(true);
@@ -313,7 +313,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			laberintoGrafico[12][18].setVisible(true);
 		}
 		if ((blinky.ghostLabel.isVisible() == true)
-				&& (blinky.isEnTablero() == true)) {
+				&& (blinky.isOnBoard() == true)) {
 			laberintoGrafico[11][16].setVisible(false);
 			laberintoGrafico[12][16].setVisible(false);
 			laberintoGrafico[11][17].setVisible(false);
@@ -322,7 +322,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			laberintoGrafico[12][18].setVisible(false);
 		}
 		if ((blinky.ghostLabel.isVisible() == false)
-				&& (blinky.isEnTablero() == false)) {
+				&& (blinky.isOnBoard() == false)) {
 			laberintoGrafico[11][16].setVisible(true);
 			laberintoGrafico[12][16].setVisible(true);
 			laberintoGrafico[11][17].setVisible(true);
@@ -340,7 +340,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 
 	private void visualizarPinkyenCasa() {
 		if (pinky.ghostLabel.isVisible() == false
-				&& (pinky.isEnTablero() == true)) {
+				&& (pinky.isOnBoard() == true)) {
 			laberintoGrafico[13][16].setVisible(true);
 			laberintoGrafico[14][16].setVisible(true);
 			laberintoGrafico[13][17].setVisible(true);
@@ -349,7 +349,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			laberintoGrafico[14][18].setVisible(true);
 		}
 		if ((pinky.ghostLabel.isVisible() == true)
-				&& (pinky.isEnTablero() == true)) {
+				&& (pinky.isOnBoard() == true)) {
 			laberintoGrafico[13][16].setVisible(false);
 			laberintoGrafico[14][16].setVisible(false);
 			laberintoGrafico[13][17].setVisible(false);
@@ -358,7 +358,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			laberintoGrafico[14][18].setVisible(false);
 		}
 		if ((pinky.ghostLabel.isVisible() == false)
-				&& (pinky.isEnTablero() == false)) {
+				&& (pinky.isOnBoard() == false)) {
 			laberintoGrafico[13][16].setVisible(true);
 			laberintoGrafico[14][16].setVisible(true);
 			laberintoGrafico[13][17].setVisible(true);
@@ -370,7 +370,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 
 	/**
 	 * 
-	 * M�todo que se encarga de detectar si hay un fantasma en una casilla y
+	 * M�todo que se encarga de detectar si hay un ghost en una cell y
 	 * cual es. Calcula la distancia entre 2 puntos y si es menor de 16, indica
 	 * que se estan tocando.
 	 * 
@@ -378,7 +378,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 	 *            con posicion x y Integer con posici�n y.
 	 * @return blinky, pinky o clyde.
 	 */
-	public Ghost getFantasmaEnCoordenadas(Integer x, Integer y) {
+	public Ghost getGhostEnCoordenadas(Integer x, Integer y) {
 		if (calcularDistancia(x, y, blinky.getX(), blinky.getY()) < 16) {
 			return blinky;
 		}
@@ -407,7 +407,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 	 * M�todo que se ejecuta en cada llamada del timer y se encarga de
 	 * actualizar las posiciones de los personajes. Adem�s borra los puntos
 	 * comidos y actualiza el scoreBoard de los puntos. Se le ha a�adido un
-	 * contador de ciclo para sacar los fantasmas uno a uno. Tambien actualiza
+	 * contador de ciclo para sacar los ghosts uno a uno. Tambien actualiza
 	 * el tiempo del estado especial.
 	 * 
 	 * @param ActionEvent
@@ -433,18 +433,18 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			anyadeClyde();
 		}
 
-		// Compruebo el tiempo transcurrido desde que se comi� al fantasma y
-		// este desapareci� del juego.
+		// Compruebo el tiempo transcurrido desde que se comi� al ghost y
+		// east desapareci� del juego.
 		if (blinky.getUltimaVezComido() != 0
 				&& new Date().getTime() - blinky.getUltimaVezComido() > 5000) {
 			// Pongo a 0 el valor de UltimaVezComido.
 			blinky.setUltimaVezComido(0);
-			// Pongo de nuevo el fantasma en juego en su posici�n inicial
+			// Pongo de nuevo el ghost en juego en su posici�n inicial
 			blinky.setPlanoX(Ghost.planoXInicial);
 			blinky.setPlanoY(Ghost.planoYInicial);
-			// Pongo al fantasma en visible.
+			// Pongo al ghost en visible.
 			blinky.ghostLabel.setVisible(true);
-			blinky.direccion = GameCharacterGraphic.OESTE;
+			blinky.direction = GameCharacterGraphic.WEST;
 			// Quito los labels de Blinky en casa.
 			visualizarBlinkyenCasa();
 		}
@@ -456,7 +456,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			clyde.setPlanoX(Ghost.planoXInicial);
 			clyde.setPlanoY(Ghost.planoYInicial);
 			clyde.ghostLabel.setVisible(true);
-			clyde.direccion = GameCharacterGraphic.OESTE;
+			clyde.direction = GameCharacterGraphic.WEST;
 			visualizarClydeenCasa();
 		}
 		// Idem que con blinky.
@@ -467,7 +467,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 			pinky.setPlanoX(Ghost.planoXInicial);
 			pinky.setPlanoY(Ghost.planoYInicial);
 			pinky.ghostLabel.setVisible(true);
-			pinky.direccion = GameCharacterGraphic.OESTE;
+			pinky.direction = GameCharacterGraphic.WEST;
 			visualizarPinkyenCasa();
 		}
 
@@ -500,7 +500,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 		// Lo a�adimos al JLayerPane.
 		juegoPane.add(blinky.ghostLabel, 3, 1);
 		// Le indicamos que esta en el tablero.
-		blinky.setEnTablero(true);
+		blinky.setOnBoard(true);
 		// Le ponemos posiciones iniciales.
 		blinky.setPlanoX(Ghost.planoXInicial);
 		blinky.setPlanoY(Ghost.planoYInicial);
@@ -517,7 +517,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 		// Lo a�adimos al JLayerPane.
 		juegoPane.add(clyde.ghostLabel, 3, 1);
 		// Le indicamos que esta en el tablero.
-		clyde.setEnTablero(true);
+		clyde.setOnBoard(true);
 		// Le ponemos posiciones iniciales.
 		clyde.setPlanoX(Ghost.planoXInicial);
 		clyde.setPlanoY(Ghost.planoYInicial);
@@ -534,7 +534,7 @@ public class GameScreenFrame extends JFrame implements KeyListener,
 		// Lo a�adimos al JLayerPane.
 		juegoPane.add(pinky.ghostLabel, 3, 1);
 		// Le indicamos que esta en el tablero.
-		pinky.setEnTablero(true);
+		pinky.setOnBoard(true);
 		// Le ponemos posiciones iniciales.
 		pinky.setPlanoX(Ghost.planoXInicial);
 		pinky.setPlanoY(Ghost.planoYInicial);

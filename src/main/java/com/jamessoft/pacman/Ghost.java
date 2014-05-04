@@ -4,31 +4,31 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 /**
- * De esta clase abstracta heredan todos los fantasmas.
+ * De esta clase abstracta heredan todos los ghosts.
  * 
  * @author:Francisco Javier Chisber Vila
  * @version:16/04/2014
  */
 public abstract class Ghost extends GameCharacterGraphic {
-	// Posici�n en columna y fila inicial del fantasma.
+	// Posici�n en columna y fila inicial del ghost.
 	public static final Integer planoXInicial = 14;
 	public static final Integer planoYInicial = 14;
 
-	// Velocidad de los fantasmas.
+	// Velocidad de los ghosts.
 	private static final int SPEED = 2;
-	// Todos los fantasmas son JLabel.
+	// Todos los ghosts son JLabel.
 	protected JLabel ghostLabel;
-	// Indica si el fantasma esta en el tablero.
-	protected boolean enTablero = false;
-	// Creamos variable random que se utilizara para elegir direccion en
-	// intersecciones.
+	// Indica si el ghost esta en el tablero.
+	protected boolean onBoard = false;
+	// Creamos variable random que se utilizara para elegir direction en
+	// intersectiones.
 	protected Random rnd = new Random();
 	// Almacena un entero con los milisegundos de la fecha actual que hace que
 	// se comio.
 	protected long ultimaVezComido = 0;
 
 	/**
-	 * Constructor que nos da los parametros generales de los fantasmas.
+	 * Constructor que nos da los parametros generales de los ghosts.
 	 */
 
 	public Ghost() {
@@ -36,9 +36,9 @@ public abstract class Ghost extends GameCharacterGraphic {
 		setPlanoX(planoXInicial);
 		setPlanoY(planoYInicial);
 
-		// Direccion que toman por defecto.
-		direccion = GameCharacterGraphic.OESTE;
-		// Creacion label del fantasma.
+		// Direction que toman por defecto.
+		direction = GameCharacterGraphic.WEST;
+		// Creacion label del ghost.
 		ghostLabel = new JLabel();
 		ghostLabel.setBounds(x, y, ancho, alto);
 		ghostLabel.validate();
@@ -50,9 +50,9 @@ public abstract class Ghost extends GameCharacterGraphic {
 	 * M�todo que devuelve si es posible mover personaje y adem�s la realiza si
 	 * es cierto actualizando coordenadas (x,y) y plano (columan,fila).
 	 * 
-	 * @return Devuelve si hay cambio de casilla
+	 * @return Devuelve si hay cambio de cell
 	 */
-	protected boolean movimiento() {
+	protected boolean movement() {
 		// Creamos 4 variables para ver cuales son las siguientes coordenadas.
 		int newY = 0;
 		int newX = 0;
@@ -60,30 +60,30 @@ public abstract class Ghost extends GameCharacterGraphic {
 		int newPlanoY = 0;
 		// Hacemos un switch con el parametro direcci�n que tiene el personaje.
 		// Actualizamos su futura posicion.
-		switch (direccion) {
-		case GameCharacterGraphic.ESTE:
+		switch (direction) {
+		case GameCharacterGraphic.EAST:
 			newX = x + SPEED;
 			newY = y;
-			newPlanoX = labyrinth.getColumna(newX + 15);
+			newPlanoX = labyrinth.getColumn(newX + 15);
 			newPlanoY = planoY;
 			break;
-		case GameCharacterGraphic.OESTE:
+		case GameCharacterGraphic.WEST:
 			newX = x - SPEED;
 			newY = y;
-			newPlanoX = labyrinth.getColumna(newX);
+			newPlanoX = labyrinth.getColumn(newX);
 			newPlanoY = planoY;
 			break;
-		case GameCharacterGraphic.NORTE:
+		case GameCharacterGraphic.NORTH:
 			newY = y - SPEED;
 			newX = x;
 			newPlanoX = planoX;
-			newPlanoY = labyrinth.getColumna(newY);
+			newPlanoY = labyrinth.getColumn(newY);
 			break;
-		case GameCharacterGraphic.SUR:
+		case GameCharacterGraphic.SOUTH:
 			newY = y + SPEED;
 			newX = x;
 			newPlanoX = planoX;
-			newPlanoY = labyrinth.getColumna(newY + 15);
+			newPlanoY = labyrinth.getColumn(newY + 15);
 			break;
 		default:
 			break;
@@ -107,59 +107,59 @@ public abstract class Ghost extends GameCharacterGraphic {
 	 * 
 	 */
 	protected void move() {
-		if (enTablero) {
-			calcularDireccion();
-			movimiento();
+		if (onBoard) {
+			calculateDirection();
+			movement();
 		}
 	}
 
 	/**
 	 * 
-	 * M�todo ABSTRACTO para calcular la direccion que tomara el fantasma.
+	 * M�todo ABSTRACTO para calcular la direction que tomara el ghost.
 	 * 
 	 */
-	protected abstract void calcularDireccion();
+	protected abstract void calculateDirection();
 
 	/**
 	 * 
-	 * M�todo que devuelve CIERTO si pacman esta a la DERECHA del fantasma.
+	 * M�todo que devuelve CIERTO si pacman esta a la RIGHT del ghost.
 	 * 
-	 * @return Devuelve CIERTO si pacman esta a la DERECHA del fantasma.
+	 * @return Devuelve CIERTO si pacman esta a la RIGHT del ghost.
 	 */
-	protected boolean pacmanDerecha() {
+	protected boolean pacmanRight() {
 		Integer pacmanX = PacmanGame.getInstace().getPacman().getPlanoX();
 		return pacmanX > planoX;
 	}
 
 	/**
 	 * 
-	 * M�todo que devuelve CIERTO si pacman esta a la IZQUIERDA del fantasma.
+	 * M�todo que devuelve CIERTO si pacman esta a la LEFT del ghost.
 	 * 
-	 * @return Devuelve CIERTO si pacman esta a la IZQUIERDA del fantasma.
+	 * @return Devuelve CIERTO si pacman esta a la LEFT del ghost.
 	 */
-	protected boolean pacmanIzquierda() {
+	protected boolean pacmanLeft() {
 		Integer pacmanX = PacmanGame.getInstace().getPacman().getPlanoX();
 		return pacmanX < planoX;
 	}// Cierre del m�todo
 
 	/**
 	 * 
-	 * M�todo que devuelve CIERTO si pacman esta ARRIBA del fantasma.
+	 * M�todo que devuelve CIERTO si pacman esta UP del ghost.
 	 * 
-	 * @return Devuelve CIERTO si pacman esta ARRIBA del fantasma.
+	 * @return Devuelve CIERTO si pacman esta UP del ghost.
 	 */
-	protected boolean pacmanArriba() {
+	protected boolean pacmanUp() {
 		Integer pacmanY = PacmanGame.getInstace().getPacman().getPlanoY();
 		return pacmanY < planoY;
 	}
 
 	/**
 	 * 
-	 * M�todo que devuelve CIERTO si pacman esta ABAJO del fantasma.
+	 * M�todo que devuelve CIERTO si pacman esta DOWN del ghost.
 	 * 
-	 * @return Devuelve CIERTO si pacman esta ABAJO del fantasma.
+	 * @return Devuelve CIERTO si pacman esta DOWN del ghost.
 	 */
-	protected boolean pacmanAbajo() {
+	protected boolean pacmanDown() {
 		Integer pacmanY = PacmanGame.getInstace().getPacman().getPlanoY();
 		return pacmanY > planoY;
 	}// Cierre del m�todo
@@ -174,32 +174,32 @@ public abstract class Ghost extends GameCharacterGraphic {
 
 	/**
 	 * 
-	 * M�todo que nos permite averiguar si el fantasma esta en la pantalla.
+	 * M�todo que nos permite averiguar si el ghost esta en la pantalla.
 	 * 
-	 * @return Devuelve TRUE si el fantasma esta en la pantalla.
+	 * @return Devuelve TRUE si el ghost esta en la pantalla.
 	 */
-	public boolean isEnTablero() {
-		return enTablero;
+	public boolean isOnBoard() {
+		return onBoard;
 	}
 
 	/**
 	 * 
-	 * M�todo que nos permite indicar que el fantasma esta en la pantalla.
+	 * M�todo que nos permite indicar que el ghost esta en la pantalla.
 	 * 
 	 * @param boolean pasamos si esta el personaje en tablero.
 	 */
 
-	public void setEnTablero(boolean enTablero) {
-		this.enTablero = enTablero;
+	public void setOnBoard(boolean onBoard) {
+		this.onBoard = onBoard;
 	}
 
 	/**
 	 * 
 	 * M�todo que nos permite capturar el momento exacto en el que pacman se ha
-	 * comido un fantasma.
+	 * comido un ghost.
 	 * 
 	 * @return Devuelve un entero con la fecha y hora exactas cuando se ha
-	 *         comido pacman un fantasma.
+	 *         comido pacman un ghost.
 	 */
 
 	public long getUltimaVezComido() {
@@ -209,7 +209,7 @@ public abstract class Ghost extends GameCharacterGraphic {
 	/**
 	 * 
 	 * M�todo que nos permite actualizar el momento exacto en el que pacman se
-	 * ha comido un fantasma.
+	 * ha comido un ghost.
 	 * 
 	 * @param long con la fecha y hora exactas en la que fu� comido .
 	 */
@@ -219,25 +219,25 @@ public abstract class Ghost extends GameCharacterGraphic {
 	}
 
 	/**
-	 * M�todo que realiza el cambio de direccion del fantasma y que lo
-	 * utilizamos cuando chocan los fantasmas.
+	 * M�todo que realiza el cambio de direction del ghost y que lo
+	 * utilizamos cuando chocan los ghosts.
 	 */
 
-	public void cambiaADireccionContraria() {
-		if (direccion == GameCharacterGraphic.ESTE) {
-			direccion = GameCharacterGraphic.OESTE;
+	public void cambiaADirectionContraria() {
+		if (direction == GameCharacterGraphic.EAST) {
+			direction = GameCharacterGraphic.WEST;
 			return;
 		}
-		if (direccion == GameCharacterGraphic.OESTE) {
-			direccion = GameCharacterGraphic.ESTE;
+		if (direction == GameCharacterGraphic.WEST) {
+			direction = GameCharacterGraphic.EAST;
 			return;
 		}
-		if (direccion == GameCharacterGraphic.NORTE) {
-			direccion = GameCharacterGraphic.SUR;
+		if (direction == GameCharacterGraphic.NORTH) {
+			direction = GameCharacterGraphic.SOUTH;
 			return;
 		}
-		if (direccion == GameCharacterGraphic.SUR) {
-			direccion = GameCharacterGraphic.NORTE;
+		if (direction == GameCharacterGraphic.SOUTH) {
+			direction = GameCharacterGraphic.NORTH;
 			return;
 		}
 	}

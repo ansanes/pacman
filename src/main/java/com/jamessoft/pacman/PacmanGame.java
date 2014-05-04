@@ -111,7 +111,7 @@ public class PacmanGame {
 	 * 
 	 * Devuelve true si han transcurrido menos de 5 segundos desde la �ltima
 	 * activaci�n del estado especial. Se invoca constantemente para decidir
-	 * como pintar los fantasmas (azules en estado especcial o con su color
+	 * como pintar los ghosts (azules en estado especcial o con su color
 	 * normal cuando no).
 	 * 
 	 * @return TRUE si no ha finalizado el estado especial.

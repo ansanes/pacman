@@ -5,7 +5,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
- * Clase del fantasma Pinky que hereda de Ghost.
+ * Clase del ghost Pinky que hereda de Ghost.
  * 
  * @author:Francisco Javier Chisber Vila
  * @version:16/04/2014
@@ -13,96 +13,96 @@ import javax.swing.ImageIcon;
 
 public class Pinky extends Ghost {
 
-	private static final Icon GHOST_ROSA_ARRIBA_IMAGE = new ImageIcon(
+	private static final Icon GHOST_PINK_UP_IMAGE = new ImageIcon(
 			Ghost.class
-					.getResource("/com/jamessoft/pacman/resources/personajes/fantasmarosa_arriba.gif"));
+					.getResource("/com/jamessoft/pacman/resources/personajes/ghostpink_up.gif"));
 
-	private static final Icon GHOST_ROSA_ABAJO_IMAGE = new ImageIcon(
+	private static final Icon GHOST_PINK_DOWN_IMAGE = new ImageIcon(
 			Ghost.class
-					.getResource("/com/jamessoft/pacman/resources/personajes/fantasmarosa_abajo.gif"));
+					.getResource("/com/jamessoft/pacman/resources/personajes/ghostpink_down.gif"));
 
-	private static final Icon GHOST_ROSA_DERECHA_IMAGE = new ImageIcon(
+	private static final Icon GHOST_PINK_RIGHT_IMAGE = new ImageIcon(
 			Ghost.class
-					.getResource("/com/jamessoft/pacman/resources/personajes/fantasmarosa_derecha.gif"));
+					.getResource("/com/jamessoft/pacman/resources/personajes/ghostpink_right.gif"));
 
-	private static final Icon GHOST_ROSA_IZQUIERDA_IMAGE = new ImageIcon(
+	private static final Icon GHOST_PINK_LEFT_IMAGE = new ImageIcon(
 			Ghost.class
-					.getResource("/com/jamessoft/pacman/resources/personajes/fantasmarosa_izquierda.gif"));
+					.getResource("/com/jamessoft/pacman/resources/personajes/ghostpink_left.gif"));
 
-	private static final Icon GHOST_ROSA_ESPECIAL_IMAGE = new ImageIcon(
+	private static final Icon GHOST_PINK_ESPECIAL_IMAGE = new ImageIcon(
 			Ghost.class
-					.getResource("/com/jamessoft/pacman/resources/personajes/fantasma_asustado.gif"));
+					.getResource("/com/jamessoft/pacman/resources/personajes/ghost_frighten.gif"));
 
 	public Pinky() {
-		ghostLabel.setIcon(GHOST_ROSA_ARRIBA_IMAGE);
+		ghostLabel.setIcon(GHOST_PINK_UP_IMAGE);
 
 	}
 
 	/**
-	 * M�todo que nos permite averiguar las posibles direcciones que puede tomar
-	 * el fantasma en su celda actual.
+	 * M�todo que nos permite averiguar las posibles directions que puede tomar
+	 * el ghost en su celda actual.
 	 */
-	protected void calcularDireccion() {
-		// Si la posicion no es modulo de 16 o no esta en una interseccion no
+	protected void calculateDirection() {
+		// Si la posicion no es modulo de 16 o no esta en una intersection no
 		// tomamos ninguna decision.
-		if ((x % 16 != 0 || y % 16 != 0) || !interseccion()) {
+		if ((x % 16 != 0 || y % 16 != 0) || !intersection()) {
 			return;
 		}
-		// Nos traemos la lista con las posibles direcciones a tomar.
-		List<Integer> direcciones = getDireccionesInterseccion(planoX, planoY,
-				direccion);
+		// Nos traemos la lista con las posibles directions a tomar.
+		List<Integer> directions = getDirectionsIntersection(planoX, planoY,
+				direction);
 		// Si el tama�o de la lista es uno, solo hay una posibilidad y la
 		// tomamos.
-		if (direcciones.size() == 1) {
-			direccion = direcciones.get(0);
+		if (directions.size() == 1) {
+			direction = directions.get(0);
 			return;
 		}
-		// A continuaci�n dependiendo de donde este pacman, comprobamos en la
+		// A continuaci�n dependiendo de donde east pacman, comprobamos en la
 		// intereseccion si existe la posibilidad
 		// de ir en su misma direcci�n y si es asi la tomamos, primero en
 		// horizontal y luego en vertical.
-		if (pacmanIzquierda() && direcciones.contains(GameCharacterGraphic.OESTE)) {
+		if (pacmanLeft() && directions.contains(GameCharacterGraphic.WEST)) {
 
-			direccion = GameCharacterGraphic.OESTE;
+			direction = GameCharacterGraphic.WEST;
 			return;
 		}
-		if (pacmanDerecha() && direcciones.contains(GameCharacterGraphic.ESTE)) {
-			direccion = GameCharacterGraphic.ESTE;
+		if (pacmanRight() && directions.contains(GameCharacterGraphic.EAST)) {
+			direction = GameCharacterGraphic.EAST;
 			return;
 		}
-		if (pacmanArriba() && direcciones.contains(GameCharacterGraphic.NORTE)) {
-			direccion = GameCharacterGraphic.NORTE;
+		if (pacmanUp() && directions.contains(GameCharacterGraphic.NORTH)) {
+			direction = GameCharacterGraphic.NORTH;
 			return;
 		}
-		if (pacmanAbajo() && direcciones.contains(GameCharacterGraphic.SUR)) {
+		if (pacmanDown() && directions.contains(GameCharacterGraphic.SOUTH)) {
 
-			direccion = GameCharacterGraphic.SUR;
+			direction = GameCharacterGraphic.SOUTH;
 			return;
 		}
 		// En caso de no existir la posibilidad cogemos aleatoriamente una de
-		// las direcciones.
-		direccion = direcciones.get(rnd.nextInt(direcciones.size()));
+		// las directions.
+		direction = directions.get(rnd.nextInt(directions.size()));
 	}
 
 	/**
-	 * M�todo que nos permite cambiar la imagen del fantasma en funci�n a su
+	 * M�todo que nos permite cambiar la imagen del ghost en funci�n a su
 	 * direcci�n y su estado (asustado o normal).
 	 */
 	public void muestraGrafico() {
 		if (PacmanGame.getInstace().estadoEspecial()) {
-			ghostLabel.setIcon(GHOST_ROSA_ESPECIAL_IMAGE);
+			ghostLabel.setIcon(GHOST_PINK_ESPECIAL_IMAGE);
 		} else {
-			if (direccion == GameCharacterGraphic.NORTE) {
-				ghostLabel.setIcon(GHOST_ROSA_ARRIBA_IMAGE);
+			if (direction == GameCharacterGraphic.NORTH) {
+				ghostLabel.setIcon(GHOST_PINK_UP_IMAGE);
 			}
-			if (direccion == GameCharacterGraphic.SUR) {
-				ghostLabel.setIcon(GHOST_ROSA_ABAJO_IMAGE);
+			if (direction == GameCharacterGraphic.SOUTH) {
+				ghostLabel.setIcon(GHOST_PINK_DOWN_IMAGE);
 			}
-			if (direccion == GameCharacterGraphic.ESTE) {
-				ghostLabel.setIcon(GHOST_ROSA_DERECHA_IMAGE);
+			if (direction == GameCharacterGraphic.EAST) {
+				ghostLabel.setIcon(GHOST_PINK_RIGHT_IMAGE);
 			}
-			if (direccion == GameCharacterGraphic.OESTE) {
-				ghostLabel.setIcon(GHOST_ROSA_IZQUIERDA_IMAGE);
+			if (direction == GameCharacterGraphic.WEST) {
+				ghostLabel.setIcon(GHOST_PINK_LEFT_IMAGE);
 			}
 
 		}

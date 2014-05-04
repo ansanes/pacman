@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class ScoreBoard extends JPanel {
 
     // Creamos un arraylist donde coincide la posici�n con la imagen.
-    private ImageIcon[] digitosImagenes = {
+    private ImageIcon[] digitImages = {
         new ImageIcon(
         Ghost.class
         .getResource("/com/jamessoft/pacman/resources/LaberintoGIF/0.gif")),
@@ -91,16 +91,16 @@ public class ScoreBoard extends JPanel {
                 puntosAmostrar.length() - 3, puntosAmostrar.length() - 2));
         int unidadmillar = Integer.parseInt(puntosAmostrar.substring(
                 puntosAmostrar.length() - 4, puntosAmostrar.length() - 3));
-        unidadesLabel.setIcon(digitosImagenes[unidades]);
-        decenasLabel.setIcon(digitosImagenes[decenas]);
-        centenasLabel.setIcon(digitosImagenes[centenas]);
-        unidadmillarLabel.setIcon(digitosImagenes[unidadmillar]);
+        unidadesLabel.setIcon(digitImages[unidades]);
+        decenasLabel.setIcon(digitImages[decenas]);
+        centenasLabel.setIcon(digitImages[centenas]);
+        unidadmillarLabel.setIcon(digitImages[unidadmillar]);
 
     }
 
     /**
      * M�todo para incrementar los puntos y repintar el marcador, cuando comemos
-     * un punto o un fantasma.
+     * un punto o un ghost.
      *
      * @param int como parametro la puntos incrementados.
      */

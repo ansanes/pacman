@@ -20,14 +20,14 @@ public class Pacman extends GameCharacterGraphic {
 	// Label del personaje
 	public JLabel personajePacman;
 	private static final int SPEED = 2;
-	private int direccionPrevista = GameCharacterGraphic.OESTE;
+	private int directionPrevista = GameCharacterGraphic.WEST;
 
 	/**
 	 * Constructor para inicializar objeto pacman. Las tareas que realiza son: -
 	 * Indicamos posiciones iniciales x e y. - Creamos una instalacia a
 	 * labyrinth. - Obtenemos la celda donde se ubica la label (columna y Fila).
 	 * - Creamos la Label y le asignamos una imagen y una posici�n. - Le
-	 * indicamos que empiece con la direcci�n OESTE. - Lo validamos.
+	 * indicamos que empiece con la direcci�n WEST. - Lo validamos.
 	 */
 
 	public Pacman() {
@@ -37,14 +37,14 @@ public class Pacman extends GameCharacterGraphic {
 		//Instancia a labyrinth.
 		labyrinth = PacmanGame.getInstace().getLaberinto();
 		//Celda original de inicio de juego pacman.
-		planoX = labyrinth.getColumna(x);
-		planoY = labyrinth.getFila(y);
+		planoX = labyrinth.getColumn(x);
+		planoY = labyrinth.geRow(y);
 		//Creamos la label que contendra la imagen.
 		personajePacman = new JLabel();
-		personajePacman.setIcon(new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/personajes/pacman_izquierda_1.gif")));
+		personajePacman.setIcon(new ImageIcon(Ghost.class.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_1.gif")));
 		personajePacman.setBounds(x, y, ancho, alto);
-		//Inicializamos la direccion hacia la izquierda.
-		direccion = GameCharacterGraphic.OESTE;
+		//Inicializamos la direction hacia la left.
+		direction = GameCharacterGraphic.WEST;
 		personajePacman.validate();
 
 	}
@@ -54,109 +54,109 @@ public class Pacman extends GameCharacterGraphic {
 	 * M�todo que devuelve si es posible mover personaje y adem�s la realiza si
 	 * es cierto actualizando coordenadas (x,y) y plano (columan,fila).
 	 * 
-	 * @return Devuelve si hay cambio de casilla
+	 * @return Devuelve si hay cambio de cell
 	 */
 
-	public boolean movimiento() {
+	public boolean movement() {
 		// Creamos 4 variables para ver cuales son las siguientes coordenadas.
 		int newY = 0;
 		int newX = 0;
 		int newPlanoX = 0;
 		int newPlanoY = 0;
 
-		// El codigo siguiente permite almacenar la direccion que le queremos
+		// El codigo siguiente permite almacenar la direction que le queremos
 		// dar antes de llegar a
 		// una intersecci�n y asi al llegar que automaticamente la tome si
 		// existe la posibilidad.
 
 		if ((x % 16) == 0 && (y % 16) == 0) {
 
-			if (interseccion()
-					&& getDireccionesInterseccion(planoX, planoY, direccion)
-							.contains(direccionPrevista)) {
+			if (intersection()
+					&& getDirectionsIntersection(planoX, planoY, direction)
+							.contains(directionPrevista)) {
 				
-				direccion = direccionPrevista;
+				direction = directionPrevista;
 			}
 		}
 
-		// Este switch permite cambiar imagen y actualizar localizacion en
+		// EAST switch permite cambiar imagen y actualizar localizacion en
 		// funci�n de la direcci�n.
-		switch (direccion) {
-		case GameCharacterGraphic.ESTE:
+		switch (direction) {
+		case GameCharacterGraphic.EAST:
 			if (planoX % 2 == 0) {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_derecha_1.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_right_1.gif")));
 				personajePacman.validate();
 			} else {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_derecha_2.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_right_2.gif")));
 				personajePacman.validate();
 			}
 			newX = x + SPEED;
 			newY = y;
-			newPlanoX = labyrinth.getColumna(newX + 15);
+			newPlanoX = labyrinth.getColumn(newX + 15);
 			newPlanoY = planoY;
 			break;
-		case GameCharacterGraphic.OESTE:
+		case GameCharacterGraphic.WEST:
 			if (planoX % 2 == 0) {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_izquierda_1.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_1.gif")));
 				personajePacman.validate();
 			} else {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_izquierda_2.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_left_2.gif")));
 				personajePacman.validate();
 			}
 			newX = x - SPEED;
 			newY = y;
-			newPlanoX = labyrinth.getColumna(newX);
+			newPlanoX = labyrinth.getColumn(newX);
 			newPlanoY = planoY;
 			break;
-		case GameCharacterGraphic.NORTE:
+		case GameCharacterGraphic.NORTH:
 			if (planoY % 2 == 0) {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_arriba_1.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_up_1.gif")));
 				personajePacman.validate();
 			} else {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_arriba_2.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_up_2.gif")));
 				personajePacman.validate();
 			}
 			newY = y - SPEED;
 			newX = x;
 			newPlanoX = planoX;
-			newPlanoY = labyrinth.getColumna(newY);
+			newPlanoY = labyrinth.getColumn(newY);
 			break;
-		case GameCharacterGraphic.SUR:
+		case GameCharacterGraphic.SOUTH:
 			if (planoY % 2 == 0) {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_abajo_1.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_down_1.gif")));
 				personajePacman.validate();
 			} else {
 				personajePacman
 						.setIcon(new ImageIcon(
 								Ghost.class
-										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_abajo_2.gif")));
+										.getResource("/com/jamessoft/pacman/resources/personajes/pacman_down_2.gif")));
 				personajePacman.validate();
 			}
 			newY = y + SPEED;
 			newX = x;
 			newPlanoX = planoX;
-			newPlanoY = labyrinth.getColumna(newY + 15);
+			newPlanoY = labyrinth.getColumn(newY + 15);
 			break;
 		default:
 			break;
@@ -176,9 +176,9 @@ public class Pacman extends GameCharacterGraphic {
 			// actualizamos plano y posici�n.
 
 		} else {
-			Integer contenidoCasilla = labyrinth.getValueAt(newPlanoX,
+			Integer contenidoCell = labyrinth.getValueAt(newPlanoX,
 					newPlanoY);
-			if (contenidoCasilla == -1) {
+			if (contenidoCell == -1) {
 				return false;
 			} else {
 				planoX = newPlanoX;
@@ -198,7 +198,7 @@ public class Pacman extends GameCharacterGraphic {
 	 */
 	public void move() {
 
-		movimiento();
+		movement();
 
 		if (x < 16) {
 			x = 416;
@@ -210,7 +210,7 @@ public class Pacman extends GameCharacterGraphic {
 	}
 
 	/**
-	 * M�todo implementado por el keyListener que nos actualiza la direccion de
+	 * M�todo implementado por el keyListener que nos actualiza la direction de
 	 * pacman seg�n direcci�n que pulsemos con el teclado.
 	 * 
 	 * @param KeyEvent la tecla capturada al pulsar en el teclado.
@@ -219,92 +219,92 @@ public class Pacman extends GameCharacterGraphic {
 	public void keyPressed(KeyEvent f) {
 		int key = f.getKeyCode();
 
-		// Si anteriormente tenia direccion izquierda y le doy a la derecha, va
-		// hacia la derecha.
-		// Si no tenia direccion derecha y no es multiplo de 16 (es el tama�o de
+		// Si anteriormente tenia direction left y le doy a la right, va
+		// hacia la right.
+		// Si no tenia direction right y no es multiplo de 16 (es el tama�o de
 		// la celda y asi detectamos que esta justo en ella) va hacia la
-		// derecha.
-		// Esta l�gica la repetimos para arriba, abajo, izquierda y derecha.
-		// Almacenamos la direccion previa
-		int direccionActual = direccion;
+		// right.
+		// Esta l�gica la repetimos para up, down, left y right.
+		// Almacenamos la direction previa
+		int directionActual = direction;
 		if (key == KeyEvent.VK_RIGHT) {
-			direccionPrevista = GameCharacterGraphic.ESTE;
-			if (direccion == GameCharacterGraphic.OESTE) {
+			directionPrevista = GameCharacterGraphic.EAST;
+			if (direction == GameCharacterGraphic.WEST) {
 
-				direccion = GameCharacterGraphic.ESTE;
-			} else if (direccion != GameCharacterGraphic.ESTE) {
+				direction = GameCharacterGraphic.EAST;
+			} else if (direction != GameCharacterGraphic.EAST) {
 				if (y % 16 == 0) {
-					direccion = GameCharacterGraphic.ESTE;
+					direction = GameCharacterGraphic.EAST;
 				}
 			}
 		}
 		if (key == KeyEvent.VK_LEFT) {
-			direccionPrevista = GameCharacterGraphic.OESTE;
-			if (direccion == GameCharacterGraphic.ESTE) {
-				direccion = GameCharacterGraphic.OESTE;
-			} else if (direccion != GameCharacterGraphic.OESTE) {
+			directionPrevista = GameCharacterGraphic.WEST;
+			if (direction == GameCharacterGraphic.EAST) {
+				direction = GameCharacterGraphic.WEST;
+			} else if (direction != GameCharacterGraphic.WEST) {
 				if (y % 16 == 0) {
-					direccion = GameCharacterGraphic.OESTE;
+					direction = GameCharacterGraphic.WEST;
 				}
 			}
 		}
 		if (key == KeyEvent.VK_UP) {
-			direccionPrevista = GameCharacterGraphic.NORTE;
-			if (direccion == GameCharacterGraphic.SUR) {
-				direccion = GameCharacterGraphic.NORTE;
-			} else if (direccion != GameCharacterGraphic.SUR) {
+			directionPrevista = GameCharacterGraphic.NORTH;
+			if (direction == GameCharacterGraphic.SOUTH) {
+				direction = GameCharacterGraphic.NORTH;
+			} else if (direction != GameCharacterGraphic.SOUTH) {
 				if (x % 16 == 0) {
-					direccion = GameCharacterGraphic.NORTE;
+					direction = GameCharacterGraphic.NORTH;
 				}
 			}
 
 		}
 		if (key == KeyEvent.VK_DOWN) {
-			direccionPrevista = GameCharacterGraphic.SUR;
-			if (direccion == GameCharacterGraphic.NORTE) {
-				direccion = GameCharacterGraphic.SUR;
-			} else if (direccion != GameCharacterGraphic.NORTE) {
+			directionPrevista = GameCharacterGraphic.SOUTH;
+			if (direction == GameCharacterGraphic.NORTH) {
+				direction = GameCharacterGraphic.SOUTH;
+			} else if (direction != GameCharacterGraphic.NORTH) {
 				if (x % 16 == 0) {
-					direccion = GameCharacterGraphic.SUR;
+					direction = GameCharacterGraphic.SOUTH;
 				}
 			}
 		}
 
-		// Si la direccion elegida por el jugardor no est� dentro de la
-		// direcciones posibles, reestablecemos la direccion previa
-		if (!getDireccionesPosibles(planoX, planoY).contains(direccion)) {
-			direccion = direccionActual;
+		// Si la direction elegida por el jugardor no est� dentro de la
+		// directions posibles, reestablecemos la direction previa
+		if (!getDirectionsPosibles(planoX, planoY).contains(direction)) {
+			direction = directionActual;
 		}
 	}
 
 	
 	/**
-	 * M�todo calcula las direcciones posibles a partir de una coordenada del tablero.
+	 * M�todo calcula las directions posibles a partir de una coordenada del tablero.
 	 * 
 	 * @param Integer para el plano x (columna) y Integer para el plano y (fila).
-	 * @return Lista con las posible direcciones que se puede tomar en las celdas contiguas.
+	 * @return Lista con las posible directions que se puede tomar en las celdas contiguas.
 	 */
 	
 	// 
-	protected List<Integer> getDireccionesPosibles(Integer x, Integer y) {
-		List<Integer> direcciones = new ArrayList<Integer>();
-		Integer casillaDerecha = labyrinth.getValueAt(x + 1, y);
-		Integer casillaIzquierda = labyrinth.getValueAt(x - 1, y);
-		Integer casillaArriba = labyrinth.getValueAt(x, y - 1);
-		Integer casillaAbajo = labyrinth.getValueAt(x, y + 1);
-		if (casillaArriba != -1) {
-			direcciones.add(GameCharacterGraphic.NORTE);
+	protected List<Integer> getDirectionsPosibles(Integer x, Integer y) {
+		List<Integer> directions = new ArrayList<Integer>();
+		Integer cellRight = labyrinth.getValueAt(x + 1, y);
+		Integer cellLeft = labyrinth.getValueAt(x - 1, y);
+		Integer cellUp = labyrinth.getValueAt(x, y - 1);
+		Integer cellDown = labyrinth.getValueAt(x, y + 1);
+		if (cellUp != -1) {
+			directions.add(GameCharacterGraphic.NORTH);
 		}
-		if (casillaAbajo != -1) {
-			direcciones.add(GameCharacterGraphic.SUR);
+		if (cellDown != -1) {
+			directions.add(GameCharacterGraphic.SOUTH);
 		}
-		if (casillaDerecha != -1) {
-			direcciones.add(GameCharacterGraphic.ESTE);
+		if (cellRight != -1) {
+			directions.add(GameCharacterGraphic.EAST);
 		}
-		if (casillaIzquierda != -1) {
-			direcciones.add(GameCharacterGraphic.OESTE);
+		if (cellLeft != -1) {
+			directions.add(GameCharacterGraphic.WEST);
 		}
-		return direcciones;
+		return directions;
 	}
 
 	/**
@@ -313,8 +313,8 @@ public class Pacman extends GameCharacterGraphic {
 	 * @param int que indica la direcci�n nueva a actualizar.
 	 */
 
-	public void setDireccion(int direccion) {
-		this.direccion = direccion;
+	public void setDirection(int direction) {
+		this.direction = direction;
 
 	}
 
