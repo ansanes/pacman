@@ -37,8 +37,7 @@ public class Blinky extends Ghost {
 	}
 
 	/**
-	 * M�todo que nos permite averiguar las posibles directions que puede tomar
-	 * el ghost en su celda actual.
+	 * Calculate possible direcction for the ghost
 	 */
 
 	protected void calculateDirection() {
